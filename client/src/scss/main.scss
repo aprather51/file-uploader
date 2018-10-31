@@ -26,11 +26,13 @@ a {
 	text-decoration: none;
 }
 
-img {
+img,
+object {
 	display: block;
 	width: 100%;
 	height: 100%;
 }
+
 input {
 	width: 100%;
 	margin: .5rem 0;
@@ -61,5 +63,17 @@ button {
 
 .imgPreview {
 	max-width: 60%;
-	color: red;
+	color: blue;
+	object {
+		animation: fadeIn .5s ease-in;
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }

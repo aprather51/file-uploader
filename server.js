@@ -9,8 +9,8 @@ const server = express();
 const port = process.env.PORT || 5000;
 
 //body-parser
-// server.use(bodyParser.urlencoded({ extended: true }));
-// server.use(bodyParser.json());
+server.use(bodyParser.urlencoded({ extended: true }));
+server.use(bodyParser.json());
 
 //Set storage engine
 const storage = multer.diskStorage({
@@ -29,12 +29,7 @@ const storage = multer.diskStorage({
 //create instance with multer that will be upload/save the file.
 const upload = multer({ storage });
 
-//const server = express();
-
-// server.use(bodyParser.urlencoded({ extended: true }));
-// server.use(bodyParser.json());
-
-//dPost the file prior to const upload (above)
+//Post the file prior to const upload (above)
 server.post('/', upload.single('selectedFile'), (req, res) => {
 	res.send();
 });
