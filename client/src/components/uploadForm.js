@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+//icon
+import { ReactComponent as FileUpload } from '../svg/fileupload.svg';
+
 export default class uploadForm extends Component {
 	state = {
 		description: '',
@@ -34,6 +37,17 @@ export default class uploadForm extends Component {
 		reader.readAsDataURL(eFile);
 	};
 
+	handleReset = e => {
+		e.preventDefault();
+		//reset everything
+		//e.target.reset();
+		this.setState({
+			description: '',
+			selectedFile: '',
+			previewUrl: ''
+		});
+	};
+
 	onSubmit = e => {
 		e.preventDefault();
 
@@ -62,30 +76,60 @@ export default class uploadForm extends Component {
 	render() {
 		const { description, selectedFile, previewUrl } = this.state;
 		let preview = null;
+		let file = null;
 
 		preview = previewUrl ? (
-			<object data={previewUrl} type="image/jpeg">
+			<object className="previewText" data={previewUrl} type="image/jpeg">
 				File Selected!
 			</object>
 		) : (
 			<div className="previewText">No File Selected</div>
 		);
 
+		//--------------
+		file = selectedFile ? (
+			<span>File: {selectedFile.name}</span>
+		) : (
+			<span>
+				<figure>
+					<FileUpload className="icon-upload" />
+				</figure>
+				<p>Choose a file...</p>
+			</span>
+		);
+
+		console.log(selectedFile.name);
 		return (
 			<form onSubmit={this.onSubmit}>
-				<input
-					type="text"
-					name="description"
-					value={description}
-					onChange={this.onChange}
-				/>
-				<input
-					type="file"
-					name="selectedFile"
-					onChange={(this.onChange, this.onImageChange)}
-				/>
-				<button>Upload</button>
-				<div className="imgPreview">{preview}</div>
+				<div className="form__file-select-wrap">
+					<input
+						id="file"
+						className="input-file"
+						type="file"
+						name="selectedFile"
+						onChange={(this.onChange, this.onImageChange)}
+					/>
+					<label htmlFor="file">{file}</label>
+				</div>
+
+				<div className="preview-wrap">{preview}</div>
+
+				<div className="input-wrap">
+					<input
+						className="input-text"
+						type="text"
+						name="description"
+						value={description}
+						onChange={this.onChange}
+						placeholder="include your description..."
+					/>
+				</div>
+				<div className="btn-wrap">
+					<button className="btn">Upload</button>
+					<div className="btn" onClick={this.handleReset}>
+						Reset
+					</div>
+				</div>
 			</form>
 		);
 	}

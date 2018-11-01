@@ -1,10 +1,11 @@
 $primary: #282c34;
-$secondary: #f4f4f4;
-$accent: #61dafb;
-
+$secondary: #e4e4e4;
+$accent: #d3394c;
+$accent2: #dfc8ca;
 * {
 	padding: 0;
 	box-sizing: border-box;
+	outline: 0;
 }
 
 html {
@@ -13,7 +14,7 @@ html {
 
 body {
 	height: 100%;
-	background-color: $primary;
+	background-color: $secondary;
 }
 
 h1,
@@ -29,8 +30,13 @@ a {
 img,
 object {
 	display: block;
-	width: 100%;
-	height: 100%;
+	width: 50%;
+	height: 50%;
+	margin: 0 auto;
+}
+
+label {
+	cursor: pointer;
 }
 
 input {
@@ -39,33 +45,133 @@ input {
 	padding: .5rem 0;
 	font-size: 1.2rem;
 	border-radius: .3rem;
+	&[type=file] {
+		width: auto;
+	}
 }
 
-button {
-	padding: .5rem 2rem;
+button,
+div.btn {
 	font-size: 1.4rem;
 	border-radius: 5rem;
+	cursor: pointer;
+	text-align: center;
 }
 
-.page--content {
-	width: 70%;
+.page-content {
+	header {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: .5rem 0;
+		background: $accent;
+		h1 {
+			color: $accent2;
+			font-size: 2rem;
+			font-weight: 600;
+		}
+	}
+}
+.form__form-wrap {
+	background: $accent2;
+	width: 50%;
 	margin: 0 auto;
-	h1 {
-		color: $secondary;
-		font-weight: 600;
+	padding: 1rem;
+	margin-top: .8rem;
+	.form__file-select-wrap {
+		display: flex;
+		align-items: center;
+		.input-file {
+			position: absolute;
+			width: 0.1px;
+			height: 0.1px;
+			opacity: hidden;
+			overflow: hidden;
+			z-index: -1;
+			+ label {
+				font-size: 1.2rem;
+				font-weight: 600;
+				margin: 0 auto;
+				color: $accent;
+				figure {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					background: $accent;
+					padding: 0;
+					margin: 0 auto;
+					width: 100px;
+					height: 100px;
+					border-radius: 50%;
+				}
+				.icon-upload {
+					fill: white;
+					width: 60px;
+					height: 60px;
+				}
+			}
+			+ label:hover {
+				color: darken($accent, 15%);
+			}
+			+ label:hover figure {
+				background-color: darken($accent, 15%);
+			}
+		}
 	}
-	.form-wrap {
-		background: red;
+	.input-wrap {
+		display: flex;
+		justify-content: center;
+		width: 100%;
+	}
+	.input-text {
+		background-color: lighten($accent2, 5%);
 		width: 70%;
-		margin: 0 auto;
+		margin: 1rem 0;
+		padding: .5rem;
+		border: none;
+		&:focus {
+			background-color: $secondary;
+			border: 2px solid $accent;
+		}
+		&::placeholder {
+			color: lighten($accent, 10%);
+		}
+	}
+	.btn-wrap {
+		display: flex;
+		justify-content: center;
+		width: 100%;
+		.btn {
+			background-color: $accent;
+			color: $secondary;
+			width: 70%;
+			margin: 1rem;
+			padding: 1rem;
+			font-weight: 700;
+			border: none;
+			transition: .2s ease-in-out;
+			&:hover {
+				background-color: darken($accent, 15%);
+			}
+		}
 	}
 }
 
-.imgPreview {
-	max-width: 60%;
-	color: blue;
+.preview-wrap {
+	width: 70%;
+	background-color: lighten($accent2, 5%);
+	margin: 1rem auto;
 	object {
 		animation: fadeIn .5s ease-in;
+	}
+	.previewText {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: lighten($accent, 20%);
+		height: 100%;
+		font-size: 1.5rem;
+		font-weight: 700;
 	}
 }
 
